@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+  <item>
+    <color android:color="@color/purple_200"/>
+    
+  </item>
+  <item>
+    <bitmap
+      android:gravity="center"
+      android:tileMode="disabled"
+      android:src="@mipmap/logo_food"
+      
+   />
+  </item>
+
+  
+</layer-list>

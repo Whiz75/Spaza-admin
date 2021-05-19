@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/bottom_nav_order"
+        android:title="Order"
+        android:icon="@drawable/ic_order"
+        app:cnb_iconColor="@color/white_smoke"
+        app:cnb_backgroundColor="@color/dodger_blue"
+        app:cnb_textColor="@color/white_smoke"
+        />
+
+    <item
+        android:id="@+id/bottom_nav_menu"
+        android:title="menu"
+        android:icon="@drawable/ic_restaurant_menu"
+        app:cnb_iconColor="@color/white_smoke"
+        app:cnb_backgroundColor="@color/dodger_blue"
+        app:cnb_textColor="@color/white_smoke"
+        />
+
+    <item
+        android:id="@+id/bottom_nav_info"
+        android:title="Info"
+        android:icon="@drawable/ic_info"
+        app:cnb_iconColor="@color/white_smoke"
+        app:cnb_backgroundColor="@color/dodger_blue"
+        app:cnb_textColor="@color/white_smoke"/>
+
+    <item
+        android:id="@+id/bottom_nav_report"
+        android:title="Report"
+        android:icon="@drawable/ic_report"
+        app:cnb_iconColor="@color/white_smoke"
+        app:cnb_backgroundColor="@color/dodger_blue"
+        app:cnb_textColor="@color/white_smoke"
+        />
+
+    <item
+        android:id="@+id/bottom_nav_logout"
+        android:icon="@drawable/ic_power"
+        app:cnb_iconColor="@color/white_smoke"
+        app:cnb_backgroundColor="@color/dodger_blue"
+        app:cnb_textColor="@color/white_smoke"
+        android:title="Logout" />
+
+
+</menu>

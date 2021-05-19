@@ -1,0 +1,69 @@
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/DeliveryRootLayout"
+>
+    <!--<fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragMap"
+        class="com.google.android.gms.maps.SupportMapFragment"
+    />-->
+
+    <RelativeLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/relativeLayout1"
+    >
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/colorThemeColor"
+            android:id="@+id/mapsToolBar"
+            
+            app:titleTextColor="@android:color/white"
+        />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_myplaces"
+            android:layout_centerInParent="true"
+        />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            style="@android:style/Widget.Material.TextView"
+            android:layout_marginRight="35dp"
+            android:background="@android:color/white"
+            android:padding="10dp"
+            android:inputType="textMultiLine"
+            android:id="@+id/TxtAddress"
+            android:layout_above="@+id/DoneSettingLocation"
+            android:text="@string/text_address"
+        />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/DoneSettingLocation"
+            android:text="@string/button_continue"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/colorThemeColor"
+        />
+        
+
+        
+    </RelativeLayout>
+     
+    
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardElevation="8dp">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+    >
+        <LinearLayout    
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+        >
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:id="@+id/row_menuIcon"
+                android:src="@mipmap/logo_food"
+                android:layout_height="160dp"
+                android:scaleType="centerCrop"
+            />
+            
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/shop_icon"
+                android:layout_margin="5dp"
+                android:id="@+id/row_name"
+
+            />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/shop_icon"
+                android:layout_margin="5dp"
+                android:id="@+id/row_price"
+            />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/shop_icon"
+                android:layout_margin="5dp"
+                android:id="@+id/row_status"
+
+            />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/shop_icon"
+                android:layout_margin="5dp"
+            />
+
+            <com.google.android.material.chip.ChipGroup
+                android:minWidth="25dp"
+                android:minHeight="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/AddOnsChips"
+                android:layout_margin="5dp"
+                app:singleLine="false"
+                app:singleSelection="true"
+                app:chipSpacingHorizontal="12dp"
+            />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+            >
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/abc_menu_delete_shortcut_label"
+                    android:id="@+id/row_btn_delete"
+                    android:layout_margin="5dp"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@color/colorThemeColor"
+                    android:textColor="@color/colorThemeColor"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    app:cornerRadius="7dp"
+                />
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:strokeColor="@color/colorThemeColor"
+                    android:text="@string/text_update"
+                    android:textColor="@color/colorThemeColor"
+                    android:id="@+id/row_btn_update"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    app:strokeWidth="2dp"
+                    app:cornerRadius="7dp"
+                    android:layout_margin="5dp"
+                    android:layout_toStartOf="@+id/row_btn_delete"
+                />
+            </RelativeLayout>
+        </LinearLayout>
+        
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</com.google.android.material.card.MaterialCardView>
