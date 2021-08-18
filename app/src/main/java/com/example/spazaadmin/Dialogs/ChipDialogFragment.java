@@ -1,27 +1,25 @@
 package com.example.spazaadmin.Dialogs;
 
-import android.content.Context;
 import android.os.Bundle;
-
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.spazaadmin.R;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.Objects;
+
 public class ChipDialogFragment extends DialogFragment {
 
+    private ImageView close_dialog_img;
     private MaterialButton btn_addChip;
     private TextInputLayout add_Chip_InputLayout;
     private ChipGroup chipGroup;
@@ -40,18 +38,16 @@ public class ChipDialogFragment extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //getDialog().setCancelable(false);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
-        //set dialog width and heght
-        getDialog()
+        Objects.requireNonNull(getDialog())
                 .getWindow()
                 .setLayout(1000, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        //set dialog gravity
         getDialog()
                 .getWindow()
                 .setGravity(Gravity.CENTER);
@@ -63,9 +59,6 @@ public class ChipDialogFragment extends DialogFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_chip_dialog, container, false);
 
-        //fragment context
-        Context context = view.getContext();
-        //call method
         init(view);
         fragControls(view);
 
@@ -74,6 +67,7 @@ public class ChipDialogFragment extends DialogFragment {
 
     private void init(View view)
     {
+        close_dialog_img = view.findViewById(R.id.close_add_ons);
         btn_addChip = view.findViewById(R.id.BtnAddChip);
         add_Chip_InputLayout = view.findViewById(R.id.textInputLayout1);
         chipGroup = view.findViewById(R.id.AddOnsChips);
@@ -81,23 +75,29 @@ public class ChipDialogFragment extends DialogFragment {
 
     private void fragControls(View view)
     {
-        btn_addChip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btn_addChip.setOnClickListener(v -> {
 
-                String inputChip = add_Chip_InputLayout.getEditText().getText().toString().trim();
+            String inputChip = add_Chip_InputLayout.getEditText().getText().toString().trim();
+            if (TextUtils.isEmpty(inputChip)) {
+                add_Chip_InputLayout.getEditText().setError("Please enter menu item");
+            }
+            else {
+                /*Chip chip = new Chip(Objects.requireNonNull(getContext()));
+                ChipDrawable drawable = ChipDrawable.createFromAttributes(getContext(),
+                        null, 0, R.style.Widget_MaterialComponents_Chip_Entry);
 
-                if (TextUtils.isEmpty(inputChip))
-                {
-                    add_Chip_InputLayout.getEditText().setError("Please enter menu item");
-                }
-                else
-                {
-                    Toast.makeText(getActivity(),"You enterd "+ inputChip+" to chip group", Toast.LENGTH_SHORT).show();
-                    //close dialog
-                    dismiss();
-                }
+                chip.setChipDrawable(drawable);
+                chip.setText(inputChip);
+
+                chip.setOnCloseIconClickListener(v1 ->
+                        chipGroup.removeView(chip));
+                chipGroup.addView(chip);*/
+                chipText = inputChip;
+                Toast.makeText(getContext(), chipText,Toast.LENGTH_LONG).show();
             }
         });
+
+        close_dialog_img.setOnClickListener(v ->
+                dismiss());
     }
 }

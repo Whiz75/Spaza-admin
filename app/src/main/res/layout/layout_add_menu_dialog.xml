@@ -97,7 +97,8 @@
                     android:layout_alignParentEnd="true"
                     app:strokeColor="@color/colorThemeColor"
                     android:layout_centerVertical="true"
-                    android:id="@+id/BtnOpenAddDlg" />
+                    android:id="@+id/BtnOpenAddDlg"
+                    tools:ignore="HardcodedText" />
 
                 <com.google.android.material.chip.ChipGroup
                     android:layout_width="match_parent"

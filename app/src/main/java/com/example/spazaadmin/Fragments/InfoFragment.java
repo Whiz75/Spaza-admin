@@ -1,7 +1,6 @@
 package com.example.spazaadmin.Fragments;
 
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,10 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TimePicker;
 import android.widget.Toast;
-
-import com.example.spazaadmin.Dialogs.TimePickerFragment;
 import com.example.spazaadmin.R;
 import com.google.android.material.button.MaterialButton;
 
@@ -46,9 +42,6 @@ public class InfoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_info, container, false);
-        //initialize fragment context
-        Context context = view.getContext();
-
         //call methods here
         init(view);
 
@@ -77,142 +70,115 @@ public class InfoFragment extends Fragment {
     private void SelectedButtons(View view)
     {
         //select weekdays open time
-        WeekdaysOpenTimeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        WeekdaysOpenTimeButton.setOnClickListener(v -> {
 
-                try
-                {
-                    TimePickerDialog pickerDialog = new TimePickerDialog(getActivity(), R.style.Theme_MaterialComponents_Light_Dialog,
-                            new TimePickerDialog.OnTimeSetListener() {
-                                @Override
-                                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            try
+            {
+                TimePickerDialog pickerDialog = new TimePickerDialog(getActivity(), R.style.Theme_MaterialComponents_Light_Dialog,
+                        (view14, hourOfDay, minute) -> {
 
-                                    openHour = hourOfDay;
-                                    openMinutes = minute;
+                            openHour = hourOfDay;
+                            openMinutes = minute;
 
-                                    Calendar calendar = Calendar.getInstance();
+                            Calendar calendar = Calendar.getInstance();
 
-                                    calendar.set(0, 0, 0, openHour, openMinutes);
+                            calendar.set(0, 0, 0, openHour, openMinutes);
 
-                                    String time = openHour+":"+ openMinutes;
-                                    WeekdaysOpenTimeButton.setText(time);
-                                }
-                            }, 12, 0, false);
+                            String time = openHour+":"+ openMinutes;
+                            WeekdaysOpenTimeButton.setText(time);
+                        }, 12, 0, false);
 
-                    pickerDialog.updateTime(openHour, openMinutes);
-                    pickerDialog.show();
+                pickerDialog.updateTime(openHour, openMinutes);
+                pickerDialog.show();
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
         //select weekdays close time
-        WeekdaysCloseTimeButton.setOnClickListener(new View.OnClickListener() {
+        WeekdaysCloseTimeButton.setOnClickListener(v -> {
 
-            @Override
-            public void onClick(View v) {
+            try
+            {
+                //call time picker dialog
+                /*TimePickerFragment timePickerFragment = new TimePickerFragment();
+                timePickerFragment.showNow(getFragmentManager(), "time picker");*/
 
-                try
-                {
-                    //call time picker dialog
-                    /*TimePickerFragment timePickerFragment = new TimePickerFragment();
-                    timePickerFragment.showNow(getFragmentManager(), "time picker");*/
+                TimePickerDialog pickerDialog = new TimePickerDialog(getActivity(), R.style.Theme_MaterialComponents_Light_Dialog,
+                        (view13, hourOfDay, minute) -> {
 
-                    TimePickerDialog pickerDialog = new TimePickerDialog(getActivity(), R.style.Theme_MaterialComponents_Light_Dialog,
-                            new TimePickerDialog.OnTimeSetListener() {
-                                @Override
-                                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                            closeHour = hourOfDay;
+                            closeMinutes = minute;
 
-                                    closeHour = hourOfDay;
-                                    closeMinutes = minute;
+                            Calendar calendar = Calendar.getInstance();
 
-                                    Calendar calendar = Calendar.getInstance();
+                            calendar.set(0, 0, 0, openHour, openMinutes);
 
-                                    calendar.set(0, 0, 0, openHour, openMinutes);
+                            String time = closeHour+":"+ closeMinutes;
+                            WeekdaysCloseTimeButton.setText(time);
+                        }, 12, 0, false);
 
-                                    String time = closeHour+":"+ closeMinutes;
-                                    WeekdaysCloseTimeButton.setText(time);
-                                }
-                            }, 12, 0, false);
+                pickerDialog.updateTime(openHour, openMinutes);
+                pickerDialog.show();
 
-                    pickerDialog.updateTime(openHour, openMinutes);
-                    pickerDialog.show();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
         //select sat open time
-        WeekendsOpenTimeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
+        WeekendsOpenTimeButton.setOnClickListener(v -> {
+            try
             {
-                try
-                {
-                    //call time picker dialog
-                    /*TimePickerFragment timePickerFragment = new TimePickerFragment();
-                    timePickerFragment.showNow(getFragmentManager(), "time picker");*/
+                //call time picker dialog
+                /*TimePickerFragment timePickerFragment = new TimePickerFragment();
+                timePickerFragment.showNow(getFragmentManager(), "time picker");*/
 
-                    TimePickerDialog pickerDialog = new TimePickerDialog(getActivity(), R.style.Theme_MaterialComponents_Light_Dialog,
-                            new TimePickerDialog.OnTimeSetListener() {
-                                @Override
-                                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                TimePickerDialog pickerDialog = new TimePickerDialog(getActivity(), R.style.Theme_MaterialComponents_Light_Dialog,
+                        (view12, hourOfDay, minute) -> {
 
-                                    satHour = hourOfDay;
-                                    satMinutes = minute;
+                            satHour = hourOfDay;
+                            satMinutes = minute;
 
-                                    Calendar calendar = Calendar.getInstance();
+                            Calendar calendar = Calendar.getInstance();
 
-                                    calendar.set(0, 0, 0, openHour, openMinutes);
+                            calendar.set(0, 0, 0, openHour, openMinutes);
 
-                                    String time = satHour+":"+ satMinutes;
-                                    WeekendsOpenTimeButton.setText(time);
-                                }
-                            }, 12, 0, false);
+                            String time = satHour+":"+ satMinutes;
+                            WeekendsOpenTimeButton.setText(time);
+                        }, 12, 0, false);
 
-                    pickerDialog.updateTime(openHour, openMinutes);
-                    pickerDialog.show();
+                pickerDialog.updateTime(openHour, openMinutes);
+                pickerDialog.show();
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
         //select sat close time
-        WeekendsCloseTimeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
+        WeekendsCloseTimeButton.setOnClickListener(v -> {
+            try
             {
-                try
-                {
-                    //call time picker dialog
-                    TimePickerDialog pickerDialog = new TimePickerDialog(getActivity(), R.style.Theme_MaterialComponents_Light_Dialog,
-                            new TimePickerDialog.OnTimeSetListener() {
-                                @Override
-                                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                //call time picker dialog
+                TimePickerDialog pickerDialog = new TimePickerDialog(getActivity(), R.style.Theme_MaterialComponents_Light_Dialog,
+                        (view1, hourOfDay, minute) -> {
 
-                                    satHour = hourOfDay;
-                                    satMinutes = minute;
+                            satHour = hourOfDay;
+                            satMinutes = minute;
 
-                                    Calendar calendar = Calendar.getInstance();
-                                    calendar.set(0, 0, 0, openHour, openMinutes);
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.set(0, 0, 0, openHour, openMinutes);
 
-                                    String time = satHour+":"+ satMinutes;
-                                    WeekendsCloseTimeButton.setText(time);
-                                }
-                            }, 12, 0, false);
+                            String time = satHour+":"+ satMinutes;
+                            WeekendsCloseTimeButton.setText(time);
+                        }, 12, 0, false);
 
-                    pickerDialog.updateTime(openHour, openMinutes);
-                    pickerDialog.show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                pickerDialog.updateTime(openHour, openMinutes);
+                pickerDialog.show();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
@@ -222,69 +188,57 @@ public class InfoFragment extends Fragment {
     {
         timeList = new ArrayList<>();
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try
-                {
-                    TimePickerDialog pickerDialog = new TimePickerDialog(getActivity(), R.style.Theme_MaterialComponents_Light_Dialog,
-                            new TimePickerDialog.OnTimeSetListener() {
-                                @Override
-                                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        button.setOnClickListener(v -> {
+            try
+            {
+                TimePickerDialog pickerDialog = new TimePickerDialog(getActivity(), R.style.Theme_MaterialComponents_Light_Dialog,
+                        (view1, hourOfDay, minute) -> {
 
-                                    openHour = hourOfDay;
-                                    openMinutes = minute;
+                            openHour = hourOfDay;
+                            openMinutes = minute;
 
-                                    Calendar calendar = Calendar.getInstance();
-                                    calendar.set(0, 0, 0, openHour, openMinutes);
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.set(0, 0, 0, openHour, openMinutes);
 
-                                    String time = openHour+":"+ openMinutes;
-                                    button.setText(time);
-                                    //add to list
-                                    timeList.add(time);
-                                }
-                            }, 12, 0, false);
+                            String time = openHour+":"+ openMinutes;
+                            button.setText(time);
+                            //add to list
+                            timeList.add(time);
+                        }, 12, 0, false);
 
-                    pickerDialog.updateTime(openHour, openMinutes);
-                    pickerDialog.show();
+                pickerDialog.updateTime(openHour, openMinutes);
+                pickerDialog.show();
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try
-                {
-                    TimePickerDialog pickerDialog = new TimePickerDialog(getActivity(), R.style.Theme_MaterialComponents_Light_Dialog,
-                            new TimePickerDialog.OnTimeSetListener() {
-                                @Override
-                                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        button1.setOnClickListener(v -> {
+            try
+            {
+                TimePickerDialog pickerDialog = new TimePickerDialog(getActivity(), R.style.Theme_MaterialComponents_Light_Dialog,
+                        (view12, hourOfDay, minute) -> {
 
-                                    openHour = hourOfDay;
-                                    openMinutes = minute;
+                            openHour = hourOfDay;
+                            openMinutes = minute;
 
-                                    Calendar calendar = Calendar.getInstance();
-                                    calendar.set(0, 0, 0, openHour, openMinutes);
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.set(0, 0, 0, openHour, openMinutes);
 
-                                    String time = openHour+":"+ openMinutes;
-                                    button1.setText(time);
+                            String time = openHour+":"+ openMinutes;
+                            button1.setText(time);
 
-                                    timeList.add(time);
-                                }
-                            }, 12, 0, false);
+                            timeList.add(time);
+                        }, 12, 0, false);
 
-                    pickerDialog.updateTime(openHour, openMinutes);
-                    pickerDialog.show();
+                pickerDialog.updateTime(openHour, openMinutes);
+                pickerDialog.show();
 
-                    Toast.makeText(getContext(), timeList.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), timeList.toString(), Toast.LENGTH_LONG).show();
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
     }

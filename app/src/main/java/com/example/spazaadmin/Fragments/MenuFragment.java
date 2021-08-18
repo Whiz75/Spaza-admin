@@ -66,10 +66,6 @@ public class MenuFragment extends Fragment implements MenuAdapter.OnItemClickLis
         btnAddMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(view.getContext(),"here it gets in", Toast.LENGTH_LONG).show();
-
-                /*ChipDialogFragment chipDialogFragment = new ChipDialogFragment();
-                chipDialogFragment.show(getFragmentManager(), "Add");*/
 
                 AddMenuDialogFrag menuDialogFrag = new AddMenuDialogFrag();
                 menuDialogFrag.show(getFragmentManager(), "Add menu");

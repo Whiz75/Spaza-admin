@@ -25,6 +25,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
 {
     final List<MenuModel> items;
     Context context;
+
     private OnItemClickListener listener;
 
     public MenuAdapter(List<MenuModel> items, Context context, OnItemClickListener listener) {
@@ -84,8 +85,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
             if (v.getId() == btn_update.getId())
             {
                 int pos = getAdapterPosition();
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                /*AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                 View view = LayoutInflater.from(v.getContext()).inflate(R.layout.fragment_chip_dialog, null);
                 TextInputLayout inputChip = view.findViewById(R.id.textInputLayout1);
                 MaterialButton BtnAddChip = view.findViewById(R.id.BtnAddChip);
@@ -124,7 +124,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
                             alertDialog.cancel();
                         }
                     }
-                });
+                });*/
 
                 listener.onUpDateClick(pos);
             }
