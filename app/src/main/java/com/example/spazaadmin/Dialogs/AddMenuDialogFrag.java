@@ -123,7 +123,6 @@ public class AddMenuDialogFrag extends DialogFragment {
 
     private void setBtnOpenDlg(View view)
     {
-
         btnOpenDlg.setOnClickListener(v -> {
             /*MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(v.getContext());
             View view1 = LayoutInflater.from(v.getContext()).inflate(R.layout.fragment_chip_dialog, null);
