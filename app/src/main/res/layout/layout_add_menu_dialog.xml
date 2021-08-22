@@ -88,16 +88,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
             >
+
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/BtnOpenAddDlg"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                    app:strokeWidth="2dp"
-                    android:text="add"
                     android:layout_alignParentEnd="true"
-                    app:strokeColor="@color/colorThemeColor"
                     android:layout_centerVertical="true"
-                    android:id="@+id/BtnOpenAddDlg"
+                    android:text="add"
+                    app:strokeColor="@color/colorThemeColor"
+                    app:strokeWidth="2dp"
                     tools:ignore="HardcodedText" />
 
                 <com.google.android.material.chip.ChipGroup

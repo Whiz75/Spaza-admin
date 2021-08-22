@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.spazaadmin.Interfaces.FragmentClickInterface;
 import com.example.spazaadmin.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.ChipGroup;
@@ -28,11 +29,13 @@ public class ChipDialogFragment extends DialogFragment {
         // Required empty public constructor
     }
 
-    String chipText;
+    private FragmentClickInterface clickInterface;
+    private String inputItem;
 
-    public ChipDialogFragment(String chipText)
+    public ChipDialogFragment(FragmentClickInterface clickInterface ,String inputItem)
     {
-        this.chipText = chipText;
+        this.inputItem = inputItem;
+        this.clickInterface = clickInterface;
     }
 
     @Override
@@ -92,8 +95,9 @@ public class ChipDialogFragment extends DialogFragment {
                 chip.setOnCloseIconClickListener(v1 ->
                         chipGroup.removeView(chip));
                 chipGroup.addView(chip);*/
-                chipText = inputChip;
-                Toast.makeText(getContext(), chipText,Toast.LENGTH_LONG).show();
+
+                inputItem = inputChip;
+                clickInterface.getChipItem(inputItem);
             }
         });
 

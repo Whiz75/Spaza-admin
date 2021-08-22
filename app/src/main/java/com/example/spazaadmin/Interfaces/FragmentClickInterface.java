@@ -1,5 +1,5 @@
 package com.example.spazaadmin.Interfaces;
 
-public interface AddChipInterfaceClick {
+public interface FragmentClickInterface {
     void getChipItem(String item);
 }

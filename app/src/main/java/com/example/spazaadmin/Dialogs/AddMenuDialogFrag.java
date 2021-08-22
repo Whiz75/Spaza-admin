@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.DialogFragment;
 
@@ -12,16 +13,22 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.cazaea.sweetalert.SweetAlertDialog;
+import com.example.spazaadmin.Interfaces.FragmentClickInterface;
 import com.example.spazaadmin.R;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -73,7 +80,7 @@ public class AddMenuDialogFrag extends DialogFragment {
         init(view);
         pickImg(view);
         setBtnOpenDlg(view);
-        BtnSubmitMenu(view);
+        //BtnSubmitMenu(view);
 
         return view;
     }
@@ -124,8 +131,9 @@ public class AddMenuDialogFrag extends DialogFragment {
     private void setBtnOpenDlg(View view)
     {
         btnOpenDlg.setOnClickListener(v -> {
-            /*MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(v.getContext());
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(v.getContext());
             View view1 = LayoutInflater.from(v.getContext()).inflate(R.layout.fragment_chip_dialog, null);
+            ImageView close_dialog_img = view1.findViewById(R.id.close_add_ons);
             TextInputLayout inputChip = view1.findViewById(R.id.textInputLayout1);
             MaterialButton BtnAddChip = view1.findViewById(R.id.BtnAddChip);
 
@@ -151,24 +159,30 @@ public class AddMenuDialogFrag extends DialogFragment {
                     chip.setChipDrawable(drawable);
                     chip.setText(input);
 
+                    Items.add(input);
+                    //call the upload menu function
+                    BtnSubmitMenu(view, btnSubmitMenu, Items);
+
+                    //test the list
+                    Toast.makeText(getContext(),Items.toString(),Toast.LENGTH_LONG).show();
+
                     chip.setOnCloseIconClickListener(v1 ->
                             chipGroup.removeView(chip));
 
                     chipGroup.addView(chip);
                     alertDialog.cancel();
                 }
-            });*/
+            });
 
-            ChipDialogFragment fragment  = new ChipDialogFragment("What!!!");
-            assert getFragmentManager() != null;
-            fragment.show(getFragmentManager().beginTransaction(),"EXTRAS");
+            //cancel the dialog
+            close_dialog_img.setOnClickListener(v13 ->
+                    alertDialog.cancel());
         });
     }
 
-    private void BtnSubmitMenu(View view)
+    private void BtnSubmitMenu(View view, MaterialButton button, List<String> items)
     {
-        btnSubmitMenu.setOnClickListener(v -> {
-
+        button.setOnClickListener(v -> {
             String inputName = Objects.requireNonNull(inputItemName.getText()).toString().trim();
             String inputPrice = Objects.requireNonNull(inputItemPrice.getText()).toString().trim();
 
@@ -191,7 +205,7 @@ public class AddMenuDialogFrag extends DialogFragment {
                 hashMap.put("name", inputName);
                 hashMap.put("price", inputPrice);
                 hashMap.put("status", "available");
-                hashMap.put("extras",null);
+                hashMap.put("extras",items);
 
                 try
                 {
@@ -219,31 +233,31 @@ public class AddMenuDialogFrag extends DialogFragment {
                                             .putFile(img_url)
                                             .addOnSuccessListener(taskSnapshot ->
                                                     taskSnapshot
-                                                    .getStorage()
-                                                    .getDownloadUrl()
-                                                    .addOnSuccessListener(uri -> {
+                                                            .getStorage()
+                                                            .getDownloadUrl()
+                                                            .addOnSuccessListener(uri -> {
 
-                                                        FirebaseFirestore
-                                                                .getInstance()
-                                                                .collection("Menu/"+uid+"/Items")
-                                                                .document(documentReference.getId())
-                                                                .update("url",uri.toString());
+                                                                FirebaseFirestore
+                                                                        .getInstance()
+                                                                        .collection("Menu/"+uid+"/Items")
+                                                                        .document(documentReference.getId())
+                                                                        .update("url",uri.toString());
 
-                                                        pDialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
-                                                        pDialog.setTitleText("Success!!");
-                                                        pDialog.setContentText("Successfully added!");
-                                                        pDialog.setConfirmText("Ok");
+                                                                pDialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+                                                                pDialog.setTitleText("Success!!");
+                                                                pDialog.setContentText("Successfully added!");
+                                                                pDialog.setConfirmText("Ok");
 
-                                                        pDialog.setConfirmClickListener(sweetAlertDialog -> {
-                                                            dismiss();
-                                                            sweetAlertDialog.dismissWithAnimation();
-                                                        });
+                                                                pDialog.setConfirmClickListener(sweetAlertDialog -> {
+                                                                    dismiss();
+                                                                    sweetAlertDialog.dismissWithAnimation();
+                                                                });
 
-                                                        Toast.makeText(v.getContext(), "Successfully added a menu", Toast.LENGTH_LONG).show();
-                                                    })).addOnCompleteListener(task -> {
+                                                                Toast.makeText(v.getContext(), "Successfully added a menu", Toast.LENGTH_LONG).show();
+                                                            })).addOnCompleteListener(task -> {
 
-                                                        pDialog.dismissWithAnimation();
-                                                    });
+                                        pDialog.dismissWithAnimation();
+                                    });
                                 }else
                                 {
                                     SweetAlertDialog dlg = new SweetAlertDialog(view.getContext(), SweetAlertDialog.SUCCESS_TYPE);
@@ -258,12 +272,12 @@ public class AddMenuDialogFrag extends DialogFragment {
                                 }
                             }).addOnFailureListener(e ->
                             Toast.makeText(v.getContext(), e.getMessage(), Toast.LENGTH_LONG).show());
-
                     dismiss();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+
         });
     }
 }
