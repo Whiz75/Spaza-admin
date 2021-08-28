@@ -56,6 +56,12 @@ public class AddMenuDialogFrag extends DialogFragment {
         // Required empty public constructor
     }
 
+    String key;
+
+    public AddMenuDialogFrag(String key) {
+        this.key = key;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

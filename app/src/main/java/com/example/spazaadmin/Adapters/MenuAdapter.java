@@ -19,16 +19,17 @@ import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
 {
-    final List<MenuModel> items;
+    final ArrayList<MenuModel> items;
     Context context;
 
     private OnItemClickListener listener;
 
-    public MenuAdapter(List<MenuModel> items, Context context, OnItemClickListener listener) {
+    public MenuAdapter(ArrayList<MenuModel> items,Context context, OnItemClickListener listener) {
         this.items = items;
         this.context = context;
         this.listener = listener;
@@ -85,47 +86,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
             if (v.getId() == btn_update.getId())
             {
                 int pos = getAdapterPosition();
-                /*AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                View view = LayoutInflater.from(v.getContext()).inflate(R.layout.fragment_chip_dialog, null);
-                TextInputLayout inputChip = view.findViewById(R.id.textInputLayout1);
-                MaterialButton BtnAddChip = view.findViewById(R.id.BtnAddChip);
-
-                builder.setView(view);
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
-
-                BtnAddChip.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        String input = inputChip.getEditText().getText().toString().trim();
-
-                        if (TextUtils.isEmpty(input))
-                        {
-                            inputChip.getEditText().setError("Please enter a menu item");
-                        }else
-                        {
-                            Chip chip = new Chip(v.getContext());
-                            //create chip drawable
-                            ChipDrawable drawable = ChipDrawable.createFromAttributes(v.getContext(),
-                                    null, 0, R.style.Widget_MaterialComponents_Chip_Entry);
-
-                            //set chip drawable
-                            chip.setChipDrawable(drawable);
-                            chip.setText(input);
-                            chip.setOnCloseIconClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v)
-                                {
-                                    chipGroup.removeView(chip);
-                                }
-                            });
-                            chipGroup.addView(chip);
-                            alertDialog.cancel();
-                        }
-                    }
-                });*/
-
                 listener.onUpDateClick(pos);
             }
 
@@ -137,8 +97,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
         }
     }
 
-    public interface OnItemClickListener
-    {
+    public interface OnItemClickListener {
         void onUpDateClick(int pos);
         void onDeleteClick(int pos);
     }

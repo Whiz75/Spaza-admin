@@ -273,14 +273,12 @@ public class SignUpActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(phoneNo))
         {
             reg_phoneNumber.getEditText().setError("Field cannot be empty");
-
             return false;
         }
 
         else if(!(phoneNo.charAt(0)=='+') && !(phoneNo.charAt(1)=='2') && !(phoneNo.charAt(2)=='7'))
         {
             reg_phoneNumber.getEditText().setError("Invalid phone number!");
-
             return false;
         }else
         {

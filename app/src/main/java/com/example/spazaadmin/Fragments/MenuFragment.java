@@ -1,8 +1,12 @@
 package com.example.spazaadmin.Fragments;
 
 import android.content.Context;
+import android.os.Build;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,15 +22,22 @@ import com.example.spazaadmin.Dialogs.ChipDialogFragment;
 import com.example.spazaadmin.Models.MenuModel;
 import com.example.spazaadmin.R;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class MenuFragment extends Fragment implements MenuAdapter.OnItemClickListener {
 
     private RecyclerView rv;
-    private List<MenuModel> list;
+    private ArrayList<MenuModel> list = new ArrayList<>();
     private MenuAdapter adapter;
     private MaterialButton btnAddMenu;
 
@@ -77,8 +88,12 @@ public class MenuFragment extends Fragment implements MenuAdapter.OnItemClickLis
     {
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        list = new ArrayList<>();
+        adapter = new MenuAdapter(list,getContext(),this);
+        rv.setAdapter(adapter);
 
+        String uid = Objects.requireNonNull(FirebaseAuth.getInstance()
+                .getCurrentUser())
+                .getUid();
         try
         {
             for (int i = 0; i < 10 ;i++)
@@ -103,14 +118,17 @@ public class MenuFragment extends Fragment implements MenuAdapter.OnItemClickLis
     @Override
     public void onUpDateClick(int pos) {
 
-        Toast.makeText(getActivity(), "attempt to update on row:"+pos, Toast.LENGTH_LONG).show();
+        MenuModel ld = list.get(pos);
 
-        /*ChipDialogFragment dialogFragment = new ChipDialogFragment();
-        dialogFragment.show(getFragmentManager(), "Add chips");*/
+        Toast.makeText(getActivity(), "attempt to update on row: "+ld.Key, Toast.LENGTH_LONG).show();
+        AddMenuDialogFrag menuDialogFrag = new AddMenuDialogFrag(ld.Key);
+        menuDialogFrag.show(getFragmentManager(), "Update menu");
     }
 
     @Override
     public void onDeleteClick(int pos) {
-        Toast.makeText(getActivity(), "attempt to delete row:"+pos, Toast.LENGTH_LONG).show();
+
+        MenuModel ld = list.get(pos);
+        Toast.makeText(getActivity(), "attempt to delete row: "+ ld.Key, Toast.LENGTH_LONG).show();
     }
 }
