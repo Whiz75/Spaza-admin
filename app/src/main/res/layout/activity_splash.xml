@@ -15,12 +15,27 @@
         android:layout_centerInParent="true"/>
 
     <TextView
+        android:id="@+id/welcome_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="@string/welcome_splash_text"
-        android:fontFamily="@font/bungee"
+        android:fontFamily="@font/poppins_bold"
         android:textSize="36sp"
+        android:textColor="@color/goldenrod"
         android:gravity="center"
         android:layout_below="@id/welcome_iv"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/spin_kit"
+        style="@style/SpinKitView.Large.Circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/dodger_blue"
+        android:layout_below="@id/welcome_tv"
+        android:layout_centerHorizontal="true"/>
+
 </RelativeLayout>

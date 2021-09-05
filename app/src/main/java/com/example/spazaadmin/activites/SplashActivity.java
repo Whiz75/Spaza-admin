@@ -1,13 +1,13 @@
 package com.example.spazaadmin.activites;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Intent;
 import android.os.Bundle;
-
+import android.widget.ProgressBar;
 import com.example.spazaadmin.R;
-import com.example.spazaadmin.dialog.LoadingFragmentDialog;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.Circle;
+import com.github.ybq.android.spinkit.style.Wave;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -21,12 +21,16 @@ public class SplashActivity extends AppCompatActivity {
         startSplashScreen();
     }
 
-    private void startSplashScreen()
-    {
-        LoadingFragmentDialog loadingDialogFragment = new LoadingFragmentDialog("Loading...please wait");
+    private void startSplashScreen() {
+        /*LoadingFragmentDialog loadingDialogFragment = new LoadingFragmentDialog("Loading...please wait");
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         loadingDialogFragment.setCancelable(false);
-        loadingDialogFragment.show(ft, "Loading");
+        loadingDialogFragment.show(ft, "Loading");*/
+
+        ProgressBar progressBar = (ProgressBar)findViewById(R.id.spin_kit);
+        Sprite doubleBounce = new Circle();
+        progressBar.setIndeterminateDrawable(doubleBounce);
+
 
         Thread thread = new Thread(() -> {
             try {

@@ -20,6 +20,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.cazaea.sweetalert.SweetAlertDialog;
 import com.example.spazaadmin.R;
+import com.example.spazaadmin.models.MenuModel;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
@@ -202,11 +203,17 @@ public class AddMenuDialogFrag extends DialogFragment {
                         .getUid();
 
                 final Map<String, Object> hashMap = new HashMap<>();
-                hashMap.put("ey",uid);
+                hashMap.put("key",uid);
                 hashMap.put("name", inputName);
                 hashMap.put("price", inputPrice);
                 hashMap.put("status", "available");
                 hashMap.put("extras",items);
+
+                /*MenuModel menu = new MenuModel();
+                menu.setKey(uid);
+                menu.setName(inputName);
+                menu.setPrice(inputPrice);
+                menu.setStatus("Available");*/
 
                 try
                 {
@@ -218,8 +225,7 @@ public class AddMenuDialogFrag extends DialogFragment {
 
                                 documentReference.update("Key", documentReference.getId());
 
-                                if (img_url != null)
-                                {
+                                if (img_url != null) {
                                     SweetAlertDialog pDialog = new SweetAlertDialog(view.getContext(), SweetAlertDialog.PROGRESS_TYPE);
                                     pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
                                     pDialog.setTitleText("Loading");

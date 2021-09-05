@@ -9,7 +9,7 @@ public class MenuModel {
     public int imgUrl;
     public String status;
     public String key;
-    public Dictionary<String, String> AddedChips;
+    public Dictionary<String, String> extras;
 
     public MenuModel() {
         //empty constructor
@@ -23,7 +23,7 @@ public class MenuModel {
         this.imgUrl = imgUrl;
         this.status = status;
         this.key = key;
-        this.AddedChips = AddedChips;
+        this.extras = AddedChips;
     }
 
     public String getName() {
@@ -66,11 +66,11 @@ public class MenuModel {
         this.key = key;
     }
 
-    public Dictionary<String, String> getAddedChips() {
-        return AddedChips;
+    public Dictionary<String, String> getExtras() {
+        return extras;
     }
 
-    public void setAddedChips(Dictionary<String, String> addedChips) {
-        AddedChips = addedChips;
+    public void setExtras(Dictionary<String, String> extras) {
+        this.extras = extras;
     }
 }
