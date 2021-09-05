@@ -4,65 +4,66 @@ import java.util.Dictionary;
 
 public class MenuModel {
 
-    public String Name;
-    public double Price;
-    public int ImgUrl;
-    public String Status;
-    public String Key;
+    public String name;
+    public String price;
+    public int imgUrl;
+    public String status;
+    public String key;
     public Dictionary<String, String> AddedChips;
 
     public MenuModel() {
+        //empty constructor
     }
 
-    public MenuModel(String name, double price, int imgUrl, String status, String key,
+    public MenuModel(String name, String price, int imgUrl, String status, String key,
                      Dictionary<String, String> AddedChips)
     {
-        Name = name;
-        Price = price;
-        ImgUrl = imgUrl;
-        Status = status;
-        Key = key;
-        AddedChips = AddedChips;
+        this.name = name;
+        this.price = price;
+        this.imgUrl = imgUrl;
+        this.status = status;
+        this.key = key;
+        this.AddedChips = AddedChips;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
-    public double getPrice() {
-        return Price;
+    public String getPrice() {
+        return price;
     }
 
-    public void setPrice(double price) {
-        Price = price;
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     public int getImgUrl() {
-        return ImgUrl;
+        return imgUrl;
     }
 
-    public void setImgUrl(Integer imgUrl) {
-        ImgUrl = imgUrl;
+    public void setImgUrl(int imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.status = status;
     }
 
     public String getKey() {
-        return Key;
+        return key;
     }
 
     public void setKey(String key) {
-        Key = key;
+        this.key = key;
     }
 
     public Dictionary<String, String> getAddedChips() {

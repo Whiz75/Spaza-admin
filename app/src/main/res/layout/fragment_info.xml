@@ -52,13 +52,14 @@
     >
         <LinearLayout
             android:orientation="vertical"
-            android:minWidth="25px"
-            android:minHeight="25px"
+            android:minWidth="25dp"
+            android:minHeight="25dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="30dp"
             android:id="@+id/linearLayout1"
-        >
+            >
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -88,9 +89,8 @@
                     android:layout_height="wrap_content"
                     android:inputType="phone"
                     android:id="@+id/InputBusinessPhone"
-                    android:phoneNumber="true"
                     android:hint="@string/input_phone_number"
-                />
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout

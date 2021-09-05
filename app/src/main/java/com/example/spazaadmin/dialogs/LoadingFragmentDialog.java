@@ -16,7 +16,6 @@ import com.google.android.material.textview.MaterialTextView;
 public class LoadingFragmentDialog extends DialogFragment {
 
     String caption;
-
     public LoadingFragmentDialog() {
         // Required empty public constructor
     }

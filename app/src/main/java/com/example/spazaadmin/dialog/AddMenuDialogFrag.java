@@ -134,8 +134,7 @@ public class AddMenuDialogFrag extends DialogFragment {
         }
     }
 
-    private void setBtnOpenDlg(View view)
-    {
+    private void setBtnOpenDlg(View view) {
         btnOpenDlg.setOnClickListener(v -> {
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(v.getContext());
             View view1 = LayoutInflater.from(v.getContext()).inflate(R.layout.fragment_chip_dialog, null);
@@ -186,28 +185,24 @@ public class AddMenuDialogFrag extends DialogFragment {
         });
     }
 
-    private void BtnSubmitMenu(View view, MaterialButton button, List<String> items)
-    {
+    private void BtnSubmitMenu(View view, MaterialButton button, List<String> items) {
         button.setOnClickListener(v -> {
             String inputName = Objects.requireNonNull(inputItemName.getText()).toString().trim();
             String inputPrice = Objects.requireNonNull(inputItemPrice.getText()).toString().trim();
 
-            if (TextUtils.isEmpty(inputName))
-            {
+            if (TextUtils.isEmpty(inputName)) {
                 inputItemName.setError("Please the item name");
 
-            }else if (TextUtils.isEmpty(inputPrice))
-            {
+            }else if (TextUtils.isEmpty(inputPrice)) {
                 inputItemPrice.setError("Please the item's price");
-            }else
-            {
+            }else {
                 //current user's id
                 String uid = Objects.requireNonNull(FirebaseAuth.getInstance()
                         .getCurrentUser())
                         .getUid();
 
                 final Map<String, Object> hashMap = new HashMap<>();
-                hashMap.put("Key",uid);
+                hashMap.put("ey",uid);
                 hashMap.put("name", inputName);
                 hashMap.put("price", inputPrice);
                 hashMap.put("status", "available");

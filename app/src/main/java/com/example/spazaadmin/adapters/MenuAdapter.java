@@ -77,14 +77,12 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
 
         @Override
         public void onClick(View v) {
-            if (v.getId() == btn_update.getId())
-            {
+            if (v.getId() == btn_update.getId()) {
                 int pos = getAdapterPosition();
                 listener.onUpDateClick(pos);
             }
 
-            if (v.getId() == btn_delete.getId())
-            {
+            if (v.getId() == btn_delete.getId()) {
                 int pos = getAdapterPosition();
                 listener.onDeleteClick(pos);
             }
