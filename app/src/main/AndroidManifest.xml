@@ -16,10 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SpazaAdmin">
-        <activity android:name=".Activites.ParentContainerActivity" />
-        <activity android:name=".Activites.SignUpActivity" />
-        <activity android:name=".Activites.SignInActivity" />
-        <activity android:name=".Activites.SplashActivity">
+        <activity android:name=".activites.ParentContainerActivity" />
+        <activity android:name=".activites.SignUpActivity" />
+        <activity android:name=".activites.SignInActivity" />
+        <activity android:name=".activites.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
