@@ -1,44 +1,47 @@
 package com.example.spazaadmin.models;
 
-class OrderModel {
+ public class OrderModel {
 
-    public String Id;
-    public String CustomerId;
-    public String ProductId;
+    public String id;
+    public String customer_Id;
+    public String product_id;
     public String status;
+    private String quantity;
+
 
     public OrderModel() {
     }
 
-    public OrderModel(String id, String customerId, String productId, String status) {
-        Id = id;
-        CustomerId = customerId;
-        ProductId = productId;
+    public OrderModel(String id, String customerId, String productId, String status, String quantity) {
+        this.id = id;
+        customer_Id = customerId;
+        product_id = productId;
         this.status = status;
+        this.quantity = quantity;
     }
 
     public String getId() {
-        return Id;
+        return id;
     }
 
     public void setId(String id) {
-        Id = id;
+        this.id = id;
     }
 
-    public String getCustomerId() {
-        return CustomerId;
+    public String getCustomer_Id() {
+        return customer_Id;
     }
 
-    public void setCustomerId(String customerId) {
-        CustomerId = customerId;
+    public void setCustomer_Id(String customer_Id) {
+        this.customer_Id = customer_Id;
     }
 
-    public String getProductId() {
-        return ProductId;
+    public String getProduct_id() {
+        return product_id;
     }
 
-    public void setProductId(String productId) {
-        ProductId = productId;
+    public void setProduct_id(String product_id) {
+        this.product_id = product_id;
     }
 
     public String getStatus() {

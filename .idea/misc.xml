@@ -3,13 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/AdminApp/app/src/main/res/layout/activity_parent_container.xml" value="0.18645833333333334" />
         <entry key="..\:/Android/AdminApp/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
         <entry key="..\:/Android/AdminApp/app/src/main/res/layout/activity_splash.xml" value="0.18645833333333334" />
+        <entry key="..\:/Android/AdminApp/app/src/main/res/layout/chip_item.xml" value="0.18645833333333334" />
         <entry key="..\:/Android/AdminApp/app/src/main/res/layout/fragment_chip_dialog.xml" value="0.18645833333333334" />
         <entry key="..\:/Android/AdminApp/app/src/main/res/layout/fragment_info.xml" value="0.18645833333333334" />
         <entry key="..\:/Android/AdminApp/app/src/main/res/layout/fragment_menu.xml" value="0.18645833333333334" />
+        <entry key="..\:/Android/AdminApp/app/src/main/res/layout/fragment_order.xml" value="0.18645833333333334" />
         <entry key="..\:/Android/AdminApp/app/src/main/res/layout/layout_add_menu_dialog.xml" value="0.18645833333333334" />
         <entry key="..\:/Android/AdminApp/app/src/main/res/layout/loading_dialog.xml" value="0.18645833333333334" />
+        <entry key="..\:/Android/AdminApp/app/src/main/res/layout/menu_row.xml" value="0.18645833333333334" />
+        <entry key="..\:/Android/AdminApp/app/src/main/res/layout/order_dialog_fragment.xml" value="0.18645833333333334" />
+        <entry key="..\:/Android/AdminApp/app/src/main/res/layout/orders_row.xml" value="0.18645833333333334" />
+        <entry key="..\:/Android/AdminApp/app/src/main/res/layout/single_order_row.xml" value="0.18645833333333334" />
+        <entry key="..\:/Android/AdminApp/app/src/main/res/layout/tab_layout_orders.xml" value="0.18645833333333334" />
       </map>
     </option>
   </component>

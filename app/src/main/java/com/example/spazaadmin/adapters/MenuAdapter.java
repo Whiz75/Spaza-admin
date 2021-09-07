@@ -6,12 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.spazaadmin.models.MenuModel;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.spazaadmin.R;
+import com.example.spazaadmin.models.MenuModel;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
 import java.util.ArrayList;
@@ -21,7 +25,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
     final ArrayList<MenuModel> items;
     Context context;
 
-    private OnItemClickListener listener;
+    private final OnItemClickListener listener;
 
     public MenuAdapter(ArrayList<MenuModel> items,Context context, OnItemClickListener listener) {
         this.items = items;
@@ -46,6 +50,26 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
         holder.txt_price.setText(model.getPrice());
         holder.txt_status.setText(model.getStatus());
 
+        RequestOptions placeholderOption = new RequestOptions();
+        if (model.getUrl() != null) {
+            Glide.with(context)
+                    .applyDefaultRequestOptions(placeholderOption)
+                    .load(model.getUrl())
+                    .into(holder.iv_menu_icon);
+        }else {
+            placeholderOption.placeholder(R.mipmap.logo_food);
+        }
+
+        //get extras
+        holder.chipGroup.removeAllViews();
+        LayoutInflater inflate = LayoutInflater.from(holder.itemView.getContext());
+
+        for (String txt : items.get(position).getExtras()){
+            Chip chip = (Chip) inflate.inflate(R.layout.chip_item,null,false);
+
+            chip.setText(txt);
+            holder.chipGroup.addView(chip);
+        }
     }
 
     @Override
@@ -55,6 +79,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         AppCompatTextView txt_name, txt_price, txt_status;
+        AppCompatImageView iv_menu_icon;
         MaterialButton btn_update, btn_delete;
         ChipGroup chipGroup;
 
@@ -64,11 +89,12 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
             txt_name = itemView.findViewById(R.id.row_name);
             txt_price = itemView.findViewById(R.id.row_price);
             txt_status = itemView.findViewById(R.id.row_status);
+            iv_menu_icon = itemView.findViewById(R.id.row_menuIcon);
 
             chipGroup = itemView.findViewById(R.id.AddOnsChips);
-
             btn_update = itemView.findViewById(R.id.row_btn_update);
             btn_delete = itemView.findViewById(R.id.row_btn_delete);
+
 
             //on buttons click
             btn_update.setOnClickListener(this);

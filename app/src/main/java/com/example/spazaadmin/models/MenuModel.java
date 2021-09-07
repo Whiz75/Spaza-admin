@@ -1,74 +1,74 @@
 package com.example.spazaadmin.models;
 
-import java.util.Dictionary;
+import java.util.List;
 
 public class MenuModel {
 
-    public String Name;
-    public String Price;
-    public int ImgUrl;
-    public String Status;
-    public String Key;
-    public Dictionary<String, String> AddedChips;
+    public String name;
+    public String price;
+    public String url;
+    public String status;
+    public String key;
+    private List<String> extras;
 
     public MenuModel() {
     }
 
-    public MenuModel(String name, String price, int imgUrl, String status, String key, Dictionary<String, String> AddedChips)
-    {
-        Name = name;
-        Price = price;
-        ImgUrl = imgUrl;
-        Status = status;
-        Key = key;
-        AddedChips = AddedChips;
+    public MenuModel(String name, String price, String url,
+                     String status, String key, List<String> extras) {
+        this.name = name;
+        this.price = price;
+        this.url = url;
+        this.status = status;
+        this.key = key;
+        this.extras = extras;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getPrice() {
-        return Price;
+        return price;
     }
 
     public void setPrice(String price) {
-        Price = price;
+        this.price = price;
     }
 
-    public int getImgUrl() {
-        return ImgUrl;
+    public String getUrl() {
+        return url;
     }
 
-    public void setImgUrl(Integer imgUrl) {
-        ImgUrl = imgUrl;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.status = status;
     }
 
     public String getKey() {
-        return Key;
+        return key;
     }
 
     public void setKey(String key) {
-        Key = key;
+        this.key = key;
     }
 
-    public Dictionary<String, String> getAddedChips() {
-        return AddedChips;
+    public List<String> getExtras() {
+        return extras;
     }
 
-    public void setAddedChips(Dictionary<String, String> addedChips) {
-        AddedChips = addedChips;
+    public void setExtras(List<String> extras) {
+        this.extras = extras;
     }
 }

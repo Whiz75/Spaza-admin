@@ -1,11 +1,9 @@
 package com.example.spazaadmin.fragments;
 
 import android.content.Context;
-import android.os.Build;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,14 +18,14 @@ import com.example.spazaadmin.dialogs.AddMenuDialogFrag;
 import com.example.spazaadmin.models.MenuModel;
 import com.example.spazaadmin.R;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 
@@ -37,6 +35,7 @@ public class MenuFragment extends Fragment implements MenuAdapter.OnItemClickLis
     private ArrayList<MenuModel> list = new ArrayList<>();
     private MenuAdapter adapter;
     private MaterialButton btnAddMenu;
+    MenuModel m;
 
     public MenuFragment() {
         // Required empty public constructor
@@ -93,7 +92,7 @@ public class MenuFragment extends Fragment implements MenuAdapter.OnItemClickLis
                 model.setName("Kota");
                 model.setPrice("R15.00");
                 model.setStatus("Available");
-                model.setImgUrl(R.mipmap.logo_food);
+                //model.setUrl(R.mipmap.logo_food);
                 list.add(model);
             }
 
@@ -114,76 +113,58 @@ public class MenuFragment extends Fragment implements MenuAdapter.OnItemClickLis
         FirebaseFirestore
                 .getInstance()
                 .collection("Menu/"+FirebaseAuth.getInstance().getUid()+"/Items")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @RequiresApi(api = Build.VERSION_CODES.N)
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        if (value != null){
-                            for (DocumentChange dc : value.getDocumentChanges()){
+                .addSnapshotListener((value, error) -> {
+                    if (value != null){
+                        for (DocumentChange dc : value.getDocumentChanges()){
 
-                                switch (dc.getType()){
-                                    case ADDED:
-                                        list.add(dc.getDocument().toObject(MenuModel.class));
-                                        adapter.notifyDataSetChanged();
-                                        break;
-                                    case MODIFIED:
-                                        list.set(dc.getOldIndex(), dc.getDocument().toObject(MenuModel.class));
-                                        adapter.notifyDataSetChanged();
-                                        break;
-                                    case REMOVED:
-                                        list.remove(dc.getOldIndex());
-                                        adapter.notifyDataSetChanged();
-                                        break;
-                                }
+                            switch (dc.getType()){
+                                case ADDED:
+                                    list.add(dc.getDocument().toObject(MenuModel.class));
+                                    adapter.notifyDataSetChanged();
+                                    break;
+                                case MODIFIED:
+                                    list.set(dc.getOldIndex(), dc.getDocument().toObject(MenuModel.class));
+                                    adapter.notifyDataSetChanged();
+                                    break;
+                                case REMOVED:
+                                    list.remove(dc.getOldIndex());
+                                    adapter.notifyDataSetChanged();
+                                    break;
                             }
                         }
                     }
                 });
-        /*FirebaseFirestore
-                .getInstance()
-                .collection("Posts")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @RequiresApi(api = Build.VERSION_CODES.N)
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-
-                        if (value != null){
-                            for (DocumentChange dc: value.getDocumentChanges()){
-
-                                switch (dc.getType()){
-                                    case ADDED:
-                                        list.add(dc.getDocument().toObject(MenuModel.class));
-                                        adapter.notifyDataSetChanged();
-                                        break;
-                                    case MODIFIED:
-                                        list.set(dc.getOldIndex(), dc.getDocument().toObject(MenuModel.class));
-                                        adapter.notifyDataSetChanged();
-                                        break;
-                                    case REMOVED:
-                                        list.remove(dc.getOldIndex());
-                                        adapter.notifyDataSetChanged();
-                                        break;
-                                }
-                            }
-                        }
-                    }
-                });*/
     }
 
     @Override
     public void onUpDateClick(int pos) {
 
-        MenuModel ld = list.get(pos);
-
-        Toast.makeText(getActivity(), "attempt to update on row: "+ld.Key, Toast.LENGTH_LONG).show();
-        AddMenuDialogFrag menuDialogFrag = new AddMenuDialogFrag(ld.Key);
-        menuDialogFrag.show(getFragmentManager(), "Update menu");
+        Toast.makeText(getContext(),"Successfully updated!" , Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onDeleteClick(int pos) {
 
-        MenuModel ld = list.get(pos);
-        Toast.makeText(getActivity(), "attempt to delete row: "+ ld.Key, Toast.LENGTH_LONG).show();
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getContext());
+        builder.setTitle(R.string.alert_title);
+        builder.setMessage(R.string.alert_message);
+        builder.setPositiveButton(R.string.alert_positive, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                FirebaseFirestore
+                        .getInstance()
+                        .collection("Menu/"+ FirebaseAuth.getInstance().getUid()+"/Items")
+                        .document(list.get(pos).getKey())
+                        .delete();
+                Toast.makeText(getContext(),"Menu deleted!" , Toast.LENGTH_SHORT).show();
+            }
+        }).setNegativeButton(R.string.alert_negative, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.show();
     }
 }

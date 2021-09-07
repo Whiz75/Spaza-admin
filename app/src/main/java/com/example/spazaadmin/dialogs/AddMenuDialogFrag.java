@@ -206,7 +206,7 @@ public class AddMenuDialogFrag extends DialogFragment {
                         .getUid();
 
                 final Map<String, Object> hashMap = new HashMap<>();
-                hashMap.put("Key",uid);
+                hashMap.put("key",null);
                 hashMap.put("name", inputName);
                 hashMap.put("price", inputPrice);
                 hashMap.put("status", "available");
@@ -220,7 +220,7 @@ public class AddMenuDialogFrag extends DialogFragment {
                             .add(hashMap)
                             .addOnSuccessListener(documentReference -> {
 
-                                documentReference.update("Key", documentReference.getId());
+                                documentReference.update("key", documentReference.getId());
 
                                 if (img_url != null)
                                 {

@@ -7,11 +7,11 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.spazaadmin.frags.InfoFragment;
-import com.example.spazaadmin.frags.LogoutFragment;
-import com.example.spazaadmin.frags.MenuFragment;
-import com.example.spazaadmin.frags.OrderFragment;
-import com.example.spazaadmin.frags.ReportFragment;
+import com.example.spazaadmin.fragments.InfoFragment;
+import com.example.spazaadmin.fragments.LogoutFragment;
+import com.example.spazaadmin.fragments.MenuFragment;
+import com.example.spazaadmin.fragments.OrderFragment;
+import com.example.spazaadmin.fragments.ReportFragment;
 import com.example.spazaadmin.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;

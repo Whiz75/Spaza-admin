@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 
@@ -16,6 +18,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.spazaadmin.R;
+import com.example.spazaadmin.adapters.MenuAdapter;
+import com.example.spazaadmin.adapters.OrderAdapter;
+import com.example.spazaadmin.models.OrderModel;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -45,8 +50,6 @@ public class OrderFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_order, container, false);
-        //set fragment context
-        Context context = view.getContext();
 
         //call methods here
         //init(view);
@@ -55,15 +58,13 @@ public class OrderFragment extends Fragment {
         return view;
     }
 
-    private void init(View view)
-    {
+    private void init(View view) {
         //initialize variables
         tabHost = view.findViewById(R.id.TabHost);
         viewpager = view.findViewById(R.id.viewpager);
     }
 
-    private void SetViewrPager(View view)
-    {
+    private void SetViewrPager(View view) {
         tabHost = view.findViewById(R.id.TabHost);
         viewpager = view.findViewById(R.id.viewpager);
 
@@ -80,8 +81,7 @@ public class OrderFragment extends Fragment {
         setupTabIcons();
     }
 
-    private void setupTabIcons()
-    {
+    private void setupTabIcons() {
         tabHost.getTabAt(0).setIcon(tabIcons[0]);
         tabHost.getTabAt(1).setIcon(tabIcons[1]);
     }

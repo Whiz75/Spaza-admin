@@ -7,22 +7,22 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecyclerOrders"
-        android:minWidth="25dp"
-        android:minHeight="25dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:minWidth="25dp"
+        android:minHeight="25dp" />
 
-    <TextView
+    <!--<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="tab 1 test"
-        android:textStyle="bold"
-        android:fontFamily="@font/advent_pro_semibold"
-        android:textColor="@color/black"
-        android:textAllCaps="true"
-        android:textSize="24sp"
         android:layout_centerInParent="true"
-        tools:ignore="HardcodedText" />
+        android:fontFamily="@font/advent_pro_semibold"
+        android:text="tab 1 test"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />-->
 
 
 </RelativeLayout>

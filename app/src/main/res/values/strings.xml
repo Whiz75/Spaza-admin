@@ -49,4 +49,9 @@
     <string name="phone_number_text">Phone Number</string>
     <string name="password_text">Password</string>
     <string name="confirm_password_text">Confirm Password</string>
+
+    <string name="alert_title">Delete menu</string>
+    <string name="alert_message">Are you sure wanna delete the menu?</string>
+    <string name="alert_positive">Yes</string>
+    <string name="alert_negative">No</string>
 </resources>
