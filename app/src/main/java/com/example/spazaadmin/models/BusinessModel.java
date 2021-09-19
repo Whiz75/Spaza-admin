@@ -1,13 +1,10 @@
 package com.example.spazaadmin.models;
 
-public class UserModel
-{
+public class BusinessModel {
+
     String businessName;
-    String businessEmail;
     String businessDescription;
     String businessPhoneNo;
-    String latlong;
-    String uri;
 
     String businessMFOpen;
     String businessMFClose;
@@ -16,20 +13,17 @@ public class UserModel
     String businessSunOpen;
     String businessSunClose;
 
-    public UserModel() {
+    public BusinessModel() {
         //empty constructor
     }
 
-    public UserModel(String businessName, String businessEmail, String businessDescription,
-                     String businessPhoneNo, String latlong, String businessMFOpen,
-                     String businessMFClose, String businessSatOpen, String businessSatClose,
-                     String businessSunOpen, String businessSunClose, String uri) {
+    public BusinessModel(String businessName, String businessDescription,
+                         String businessPhoneNo, String businessMFOpen, String businessMFClose,
+                         String businessSatOpen, String businessSatClose,
+                         String businessSunOpen, String businessSunClose) {
         this.businessName = businessName;
-        this.businessEmail = businessEmail;
         this.businessDescription = businessDescription;
         this.businessPhoneNo = businessPhoneNo;
-        this.latlong = latlong;
-        this.uri = uri;
         this.businessMFOpen = businessMFOpen;
         this.businessMFClose = businessMFClose;
         this.businessSatOpen = businessSatOpen;
@@ -46,14 +40,6 @@ public class UserModel
         this.businessName = businessName;
     }
 
-    public String getBusinessEmail() {
-        return businessEmail;
-    }
-
-    public void setBusinessEmail(String businessEmail) {
-        this.businessEmail = businessEmail;
-    }
-
     public String getBusinessDescription() {
         return businessDescription;
     }
@@ -68,22 +54,6 @@ public class UserModel
 
     public void setBusinessPhoneNo(String businessPhoneNo) {
         this.businessPhoneNo = businessPhoneNo;
-    }
-
-    public String getLatlong() {
-        return latlong;
-    }
-
-    public void setLatlong(String latlong) {
-        this.latlong = latlong;
-    }
-
-    public String getUri() {
-        return uri;
-    }
-
-    public void setUri(String uri) {
-        this.uri = uri;
     }
 
     public String getBusinessMFOpen() {

@@ -83,6 +83,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="10"
             >
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -107,8 +109,7 @@
                     android:inputType="text"
                     android:id="@+id/InputBusinessDescription"
                     android:hint="@string/input_description"
-                    
-                />
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
             
@@ -117,108 +118,142 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="@string/text_monday_friday"
-            />
+                />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="100"
-            >
-                <com.google.android.material.button.MaterialButton
+                android:baselineAligned="false">
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="50"
-                    android:id="@+id/InputBusinessMFOpen"
-                    android:text="@string/text_open"
-                    android:focusable="false"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                />
-                 <com.google.android.material.button.MaterialButton
+                    android:hint="@string/text_open">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/InputBusinessMFOpen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="50"
-                    android:id="@+id/InputBusinessMFClose"
-                    android:text="@string/text_close"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                />   
+                    android:hint="@string/text_close">
 
-
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/InputBusinessMFClose"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"/>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/text_saterday"
                 android:layout_margin="10dp"
             />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="100"
-            >
-                <com.google.android.material.button.MaterialButton
+                android:baselineAligned="false">
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="50"
-                    android:id="@+id/InputBusinessSatOpen"
-                    android:text="@string/text_open"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                />
+                    android:hint="@string/text_open">
 
-                 <com.google.android.material.button.MaterialButton
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/InputBusinessSatOpen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="50"
-                    android:id="@+id/InputBusinessSatClose"
-                    android:text="@string/text_close"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                />
+                    android:hint="@string/text_close">
 
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/InputBusinessSatClose"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"/>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/text_sunday"
                 android:layout_margin="10dp"
             />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="100"
-            >
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="50"
-                    android:id="@+id/InputBusinessSunOpen"
-                    android:text="@string/text_open"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                />
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="50"
-                    android:id="@+id/InputBusinessSunClose"
-                    android:text="@string/text_close"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                />
-                
-                
+                android:baselineAligned="false">
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:hint="@string/text_open">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/InputBusinessSunOpen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:hint="@string/text_close">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/InputBusinessSunClose"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"/>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
+
             <com.google.android.material.button.MaterialButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -237,9 +272,9 @@
                 android:text="@string/text_update"
                 android:id="@+id/BtnUpdateProfile"
             />
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_edit_img"
         android:layout_width="wrap_content"

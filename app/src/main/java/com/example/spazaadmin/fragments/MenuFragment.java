@@ -1,7 +1,7 @@
 package com.example.spazaadmin.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -24,16 +24,11 @@ import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
-
 
 public class MenuFragment extends Fragment implements MenuAdapter.OnItemClickListener {
 
-    private RecyclerView rv;
     private ArrayList<MenuModel> list = new ArrayList<>();
-    private MenuAdapter adapter;
     private MaterialButton btnAddMenu;
     MenuModel m;
 
@@ -64,46 +59,17 @@ public class MenuFragment extends Fragment implements MenuAdapter.OnItemClickLis
     }
 
     private void init(View view) {
-        rv = view.findViewById(R.id.menu_rv);
         btnAddMenu = view.findViewById(R.id.BtnAddMenu);
     }
 
     private void AddMenu(View view) {
         btnAddMenu.setOnClickListener(v -> {
             AddMenuDialogFrag menuDialogFrag = new AddMenuDialogFrag();
-            menuDialogFrag.show(getFragmentManager(), "Add menu");
+            menuDialogFrag.show(Objects.requireNonNull(getFragmentManager()), "Add menu");
         });
     }
 
-    private void LoadData(View view) {
-        rv.setHasFixedSize(true);
-        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new MenuAdapter(list,getContext(),this);
-        rv.setAdapter(adapter);
-
-        String uid = Objects.requireNonNull(FirebaseAuth.getInstance()
-                .getCurrentUser())
-                .getUid();
-        try
-        {
-            for (int i = 0; i < 10 ;i++) {
-                MenuModel model = new MenuModel();
-                model.setKey("random");
-                model.setName("Kota");
-                model.setPrice("R15.00");
-                model.setStatus("Available");
-                //model.setUrl(R.mipmap.logo_food);
-                list.add(model);
-            }
-
-            adapter = new MenuAdapter(list, getActivity(),this);
-            rv.setAdapter(adapter);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+    @SuppressLint("NotifyDataSetChanged")
     private void LoadDatabaseData(View view){
         RecyclerView recyclerView = view.findViewById(R.id.menu_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -145,25 +111,17 @@ public class MenuFragment extends Fragment implements MenuAdapter.OnItemClickLis
     @Override
     public void onDeleteClick(int pos) {
 
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getContext());
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(Objects.requireNonNull(getContext()));
         builder.setTitle(R.string.alert_title);
         builder.setMessage(R.string.alert_message);
-        builder.setPositiveButton(R.string.alert_positive, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                FirebaseFirestore
-                        .getInstance()
-                        .collection("Menu/"+ FirebaseAuth.getInstance().getUid()+"/Items")
-                        .document(list.get(pos).getKey())
-                        .delete();
-                Toast.makeText(getContext(),"Menu deleted!" , Toast.LENGTH_SHORT).show();
-            }
-        }).setNegativeButton(R.string.alert_negative, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+        builder.setPositiveButton(R.string.alert_positive, (dialog, which) -> {
+            FirebaseFirestore
+                    .getInstance()
+                    .collection("Menu/"+ FirebaseAuth.getInstance().getUid()+"/Items")
+                    .document(list.get(pos).getKey())
+                    .delete();
+            Toast.makeText(getContext(),"Menu deleted!" , Toast.LENGTH_SHORT).show();
+        }).setNegativeButton(R.string.alert_negative, (dialog, which) -> dialog.dismiss());
 
         builder.show();
     }

@@ -8,6 +8,9 @@ public class AdminModel {
     private String phoneNumber;
     private String url;
 
+    public AdminModel() {
+    }
+
     public AdminModel(String email, String fullName, String latlong, String phoneNumber, String url) {
         this.email = email;
         this.fullName = fullName;

@@ -87,8 +87,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
             super(itemView);
 
             txt_name = itemView.findViewById(R.id.row_name);
-            txt_price = itemView.findViewById(R.id.row_price);
-            txt_status = itemView.findViewById(R.id.row_status);
+            txt_price = itemView.findViewById(R.id.row_order_id);
+            txt_status = itemView.findViewById(R.id.row_quantity);
             iv_menu_icon = itemView.findViewById(R.id.row_menuIcon);
 
             chipGroup = itemView.findViewById(R.id.AddOnsChips);

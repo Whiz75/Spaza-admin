@@ -39,14 +39,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/shop_icon"
                 android:layout_margin="5dp"
-                android:id="@+id/row_price"
+                android:id="@+id/row_order_id"
             />
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/shop_icon"
                 android:layout_margin="5dp"
-                android:id="@+id/row_status"
+                android:id="@+id/row_quantity"
 
             />
 

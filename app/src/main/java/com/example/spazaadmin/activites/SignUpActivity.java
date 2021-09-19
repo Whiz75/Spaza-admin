@@ -170,9 +170,19 @@ public class SignUpActivity extends AppCompatActivity {
                            .addOnSuccessListener(authResult -> {
                                //call reg method here
                                UserModel user = new UserModel();
-                               user.setFullName(fullName);
-                               user.setEmail(email);
-                               user.setPhoneNumber(phoneNo);
+                               user.setBusinessName(fullName);
+                               user.setBusinessEmail(email);
+                               user.setBusinessPhoneNo(phoneNo);
+                               user.setBusinessDescription(null);
+                               user.setLatlong(null);
+                               user.setUri(null);
+
+                               user.setBusinessMFOpen(null);
+                               user.setBusinessMFClose(null);
+                               user.setBusinessSatOpen(null);
+                               user.setBusinessSatClose(null);
+                               user.setBusinessSunOpen(null);
+                               user.setBusinessSunClose(null);
 
                                FirebaseFirestore
                                        .getInstance()
@@ -180,7 +190,7 @@ public class SignUpActivity extends AppCompatActivity {
                                        .document(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
                                        .set(user);
 
-                               Toast.makeText(getApplicationContext(), "It works bruh!", Toast.LENGTH_LONG).show();
+                               Toast.makeText(getApplicationContext(), "Business profile created...successful!!!", Toast.LENGTH_LONG).show();
 
                                startActivity(new Intent(getApplicationContext(), ParentContainerActivity.class));
                                finish();

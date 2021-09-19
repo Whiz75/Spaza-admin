@@ -13,35 +13,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/user_iamge"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="5dp"
-            android:layout_centerVertical="true"
-            />
-
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/customer_id"
-            android:layout_width="match_parent"
+            android:id="@+id/order_id"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:layout_toEndOf="@id/user_iamge"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/prepare_btn"
             />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/prepare_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/customer_id"
+            android:layout_below="@id/order_id"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
-            android:text="View" />
+            android:text="done" />
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>
