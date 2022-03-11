@@ -25,15 +25,8 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void startSplashScreen() {
-        /*LoadingFragmentDialog loadingDialogFragment = new LoadingFragmentDialog("Loading...please wait");
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        loadingDialogFragment.setCancelable(false);
-        loadingDialogFragment.show(ft, "Loading");*/
 
-        ProgressBar progressBar = (ProgressBar)findViewById(R.id.spin_kit);
-        Sprite doubleBounce = new Circle();
-        progressBar.setIndeterminateDrawable(doubleBounce);
-
+        //ProgressBar progressBar = (ProgressBar)findViewById(R.id.spin_kit);
 
         Thread thread = new Thread(() -> {
             try {
