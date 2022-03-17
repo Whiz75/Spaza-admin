@@ -28,7 +28,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import java.util.ArrayList;
@@ -150,11 +149,9 @@ public class AddMenuDialogFrag extends DialogFragment {
 
                 String input = inputChip.getEditText().getText().toString().trim();
 
-                if (TextUtils.isEmpty(input))
-                {
+                if (TextUtils.isEmpty(input)) {
                     inputChip.getEditText().setError("Please enter a menu item");
-                }else
-                {
+                }else {
                     Chip chip = new Chip(view1.getContext());
                     //create chip drawable
                     ChipDrawable drawable = ChipDrawable.createFromAttributes(v12.getContext(),
@@ -167,7 +164,6 @@ public class AddMenuDialogFrag extends DialogFragment {
                     Items.add(input);
                     //call the upload menu function
                     BtnSubmitMenu(view, btnSubmitMenu, Items);
-
                     //test the list
                     Toast.makeText(getContext(),Items.toString(),Toast.LENGTH_LONG).show();
 
@@ -185,25 +181,17 @@ public class AddMenuDialogFrag extends DialogFragment {
         });
     }
 
-    private void BtnSubmitMenu(View view, MaterialButton button, List<String> items)
-    {
+    private void BtnSubmitMenu(View view, MaterialButton button, List<String> items) {
         button.setOnClickListener(v -> {
             String inputName = Objects.requireNonNull(inputItemName.getText()).toString().trim();
             String inputPrice = Objects.requireNonNull(inputItemPrice.getText()).toString().trim();
 
-            if (TextUtils.isEmpty(inputName))
-            {
+            if (TextUtils.isEmpty(inputName)) {
                 inputItemName.setError("Please the item name");
 
-            }else if (TextUtils.isEmpty(inputPrice))
-            {
+            }else if (TextUtils.isEmpty(inputPrice)) {
                 inputItemPrice.setError("Please the item's price");
-            }else
-            {
-                //current user's id
-                String uid = Objects.requireNonNull(FirebaseAuth.getInstance()
-                        .getCurrentUser())
-                        .getUid();
+            }else {
 
                 final Map<String, Object> hashMap = new HashMap<>();
                 hashMap.put("key",null);
@@ -216,14 +204,13 @@ public class AddMenuDialogFrag extends DialogFragment {
                 {
                     FirebaseFirestore
                             .getInstance()
-                            .collection("Menu/"+uid+"/Items")
+                            .collection("Menu")
                             .add(hashMap)
                             .addOnSuccessListener(documentReference -> {
 
                                 documentReference.update("key", documentReference.getId());
 
-                                if (img_url != null)
-                                {
+                                if (img_url != null) {
                                     SweetAlertDialog pDialog = new SweetAlertDialog(view.getContext(), SweetAlertDialog.PROGRESS_TYPE);
                                     pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
                                     pDialog.setTitleText("Loading");
@@ -244,7 +231,7 @@ public class AddMenuDialogFrag extends DialogFragment {
 
                                                                 FirebaseFirestore
                                                                         .getInstance()
-                                                                        .collection("Menu/"+uid+"/Items")
+                                                                        .collection("Menu")
                                                                         .document(documentReference.getId())
                                                                         .update("url",uri.toString());
 
@@ -259,10 +246,7 @@ public class AddMenuDialogFrag extends DialogFragment {
                                                                 });
 
                                                                 Toast.makeText(v.getContext(), "Successfully added a menu", Toast.LENGTH_LONG).show();
-                                                            })).addOnCompleteListener(task -> {
-
-                                        pDialog.dismissWithAnimation();
-                                    });
+                                                            })).addOnCompleteListener(task -> pDialog.dismissWithAnimation());
                                 }else
                                 {
                                     SweetAlertDialog dlg = new SweetAlertDialog(view.getContext(), SweetAlertDialog.SUCCESS_TYPE);

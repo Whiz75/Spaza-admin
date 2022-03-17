@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.cazaea.sweetalert.SweetAlertDialog;
 import com.example.spazaadmin.R;
+import com.example.spazaadmin.dialogs.MapFragment;
 import com.example.spazaadmin.models.BusinessModel;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
@@ -84,7 +85,9 @@ public class InfoFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         // Construct a FusedLocationProviderClient.
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
+        if (getContext() != null){
+            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
+        }
     }
 
     @Override
@@ -97,40 +100,49 @@ public class InfoFragment extends Fragment {
         //call methods here
         init(view);
         chooseImage(view);
+        mapFragment(view);
         uploadBusinessProfile(view);
 
         return view;
     }
 
     private void getCurrentLocation() {
-        if (ActivityCompat.checkSelfPermission(Objects.requireNonNull(getActivity()),
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            Task<Location> task = fusedLocationProviderClient.getLastLocation();
-            task.addOnSuccessListener(location -> {
-                if (location != null) {
-                    Toast.makeText(getContext(), location.getLatitude()+" "+location,Toast.LENGTH_LONG).show();
-                }else {
-                    Toast.makeText(getContext(),"couldn't get location",Toast.LENGTH_LONG).show();
-                }
-            });
-        }else {
-            requestLocationPermission();
+        if (getActivity() != null) {
+            if (ActivityCompat.checkSelfPermission(getActivity(),
+                    Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                Task<Location> task = fusedLocationProviderClient.getLastLocation();
+                task.addOnSuccessListener(location -> {
+                    if (location != null) {
+                        Toast.makeText(getContext(), location.getLatitude()+" "+location,Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(getContext(),"couldn't get location",Toast.LENGTH_LONG).show();
+                    }
+                });
+            }else {
+                requestLocationPermission();
+            }
         }
     }
 
     private void requestLocationPermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(Objects.requireNonNull(getActivity()),
-                Manifest.permission.ACCESS_COARSE_LOCATION)) {
-            new AlertDialog.Builder(Objects.requireNonNull(getContext()))
-                    .setTitle("Permission needed")
-                    .setMessage("This permission is needed because of this and that")
-                    .setPositiveButton("ok", (dialog, which) -> ActivityCompat.requestPermissions(getActivity(),
-                            new String[] {Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE))
-                    .setNegativeButton("cancel", (dialog, which) -> dialog.dismiss())
-                    .create().show();
-        } else {
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[] {Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
+        if (getActivity() != null) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                    Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Permission needed")
+                        .setMessage("This permission is needed because of this and that")
+                        .setPositiveButton("ok", (dialog, which) ->
+                                ActivityCompat.requestPermissions(getActivity(),
+                                new String[]
+                                        {Manifest.permission.ACCESS_COARSE_LOCATION},
+                                        LOCATION_PERMISSION_REQUEST_CODE))
+                        .setNegativeButton("cancel", (dialog, which) ->
+                                dialog.dismiss())
+                        .create().show();
+            } else {
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[] {Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
+            }
         }
     }
 
@@ -237,7 +249,7 @@ public class InfoFragment extends Fragment {
             return;
         }
 
-        String businessNam = businessName.getText().toString();
+        String businessNam = businessName.getText().toString().trim();
         String businessDesc = businessName.getText().toString();
         String businessPhoneNo = businessName.getText().toString();
 
@@ -247,18 +259,6 @@ public class InfoFragment extends Fragment {
         String businessSatClose = InputBusinessSatClose.getText().toString();
         String businessSunOpen = InputBusinessSunOpen.getText().toString();
         String businessSunClose = InputBusinessSunClose.getText().toString();
-
-        /*BusinessModel business = new BusinessModel();
-        business.setBusinessName(businessNam);
-        business.setBusinessDescription(businessDesc);
-        business.setBusinessPhoneNo(businessPhoneNo);
-
-        business.setBusinessMFOpen(businessMFOpen);
-        business.setBusinessMFClose(businessMFClose);
-        business.setBusinessSatOpen(businessSatOpen);
-        business.setBusinessSatClose(businessSatClose);
-        business.setBusinessSunOpen(businessSunOpen);
-        business.setBusinessSunClose(businessSunClose);*/
 
         Map<String,Object> businessMap = new HashMap<>();
         businessMap.put("businessName", businessNam);
@@ -272,6 +272,7 @@ public class InfoFragment extends Fragment {
         businessMap.put("businessSunOpen", businessSunOpen);
         businessMap.put("businessSunClose", businessSunClose);
 
+
         SweetAlertDialog pDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.PROGRESS_TYPE);
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
         pDialog.setTitleText("Loading");
@@ -283,18 +284,10 @@ public class InfoFragment extends Fragment {
                 .collection("Admins")
                 .document(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
                 .update(businessMap)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        pDialog.dismissWithAnimation();
-                        Toast.makeText(getContext(), "Business profile created successfully!!!", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
-        });
+                .addOnSuccessListener(unused -> {
+                    pDialog.dismissWithAnimation();
+                    Toast.makeText(getContext(), "Business profile created successfully!!!", Toast.LENGTH_SHORT).show();
+                }).addOnFailureListener(Throwable::getMessage);
     }
 
     private void setTime(MaterialAutoCompleteTextView open, MaterialAutoCompleteTextView close) {
@@ -350,14 +343,11 @@ public class InfoFragment extends Fragment {
     }
 
     private void chooseImage(View view){
-        edit_img_fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_CHECK_CODE);
-            }
+        edit_img_fab.setOnClickListener(v -> {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_CHECK_CODE);
         });
     }
 
@@ -394,31 +384,32 @@ public class InfoFragment extends Fragment {
                                             .collection("Admins")
                                             .document(FirebaseAuth.getInstance().getUid())
                                             .update("uri", uri1.toString())
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void unused) {
-                                                    Toast.makeText(getContext(),"picture updated!!!",Toast.LENGTH_LONG);
-                                                }
-                                            });
+                                            .addOnSuccessListener(unused ->
+                                                    Toast.makeText(getContext(),"picture updated!!!",Toast.LENGTH_LONG));
 
                                 }catch(Exception e)
                                 {
                                     Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             } catch (Exception e) {
-                                Toast.makeText(getContext(),""+e.getMessage(),Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_LONG).show();
                             }
-                        })).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getContext(),""+e.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-        });
+                        })).addOnFailureListener(e ->
+                Toast.makeText(getContext(),""+e.getMessage(),Toast.LENGTH_SHORT).show());
     }
 
     private String getFileExtention(Uri mUri) {
         ContentResolver cr = getContext().getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cr.getType(mUri));
+    }
+
+    private void mapFragment(View view){
+        MaterialButton InputBusinessAddress = view.findViewById(R.id.InputBusinessAddress);
+
+        InputBusinessAddress.setOnClickListener(v -> {
+            MapFragment frag = new MapFragment();
+            frag.show(getChildFragmentManager().beginTransaction(),"");
+        });
     }
 }

@@ -65,7 +65,7 @@ public class MenuFragment extends Fragment implements MenuAdapter.OnItemClickLis
     private void AddMenu(View view) {
         btnAddMenu.setOnClickListener(v -> {
             AddMenuDialogFrag menuDialogFrag = new AddMenuDialogFrag();
-            menuDialogFrag.show(Objects.requireNonNull(getFragmentManager()), "Add menu");
+            menuDialogFrag.show(getChildFragmentManager().beginTransaction(), "Add menu");
         });
     }
 
@@ -78,7 +78,7 @@ public class MenuFragment extends Fragment implements MenuAdapter.OnItemClickLis
 
         FirebaseFirestore
                 .getInstance()
-                .collection("Menu/"+FirebaseAuth.getInstance().getUid()+"/Items")
+                .collection("Menu")
                 .addSnapshotListener((value, error) -> {
                     if (value != null){
                         for (DocumentChange dc : value.getDocumentChanges()){
@@ -111,18 +111,19 @@ public class MenuFragment extends Fragment implements MenuAdapter.OnItemClickLis
     @Override
     public void onDeleteClick(int pos) {
 
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(Objects.requireNonNull(getContext()));
-        builder.setTitle(R.string.alert_title);
-        builder.setMessage(R.string.alert_message);
-        builder.setPositiveButton(R.string.alert_positive, (dialog, which) -> {
-            FirebaseFirestore
-                    .getInstance()
-                    .collection("Menu/"+ FirebaseAuth.getInstance().getUid()+"/Items")
-                    .document(list.get(pos).getKey())
-                    .delete();
-            Toast.makeText(getContext(),"Menu deleted!" , Toast.LENGTH_SHORT).show();
-        }).setNegativeButton(R.string.alert_negative, (dialog, which) -> dialog.dismiss());
-
-        builder.show();
+        if (getContext() != null) {
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getContext());
+            builder.setTitle(R.string.alert_title);
+            builder.setMessage(R.string.alert_message);
+            builder.setPositiveButton(R.string.alert_positive, (dialog, which) -> {
+                FirebaseFirestore
+                        .getInstance()
+                        .collection("Menu/"+ FirebaseAuth.getInstance().getUid()+"/Items")
+                        .document(list.get(pos).getKey())
+                        .delete();
+                Toast.makeText(getContext(),"Menu deleted!" , Toast.LENGTH_SHORT).show();
+            }).setNegativeButton(R.string.alert_negative, (dialog, which) -> dialog.dismiss());
+            builder.show();
+        }
     }
 }
