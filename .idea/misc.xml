@@ -21,8 +21,10 @@
         <entry key="..\:/Android/AdminApp/app/src/main/res/layout/single_prepare_row.xml" value="0.18645833333333334" />
         <entry key="..\:/Android/AdminApp/app/src/main/res/layout/tab_layout_orders.xml" value="0.18645833333333334" />
         <entry key="..\:/Android/AdminApp/app/src/main/res/layout/tab_layout_prepared_orders.xml" value="0.18645833333333334" />
+        <entry key="..\:/Android/Spaza-admin/app/src/main/res/layout/activity_splash.xml" value="0.18645833333333334" />
         <entry key="..\:/Android/Spaza-admin/app/src/main/res/layout/fragment_info.xml" value="0.18645833333333334" />
         <entry key="..\:/Android/Spaza-admin/app/src/main/res/layout/fragment_map.xml" value="0.18645833333333334" />
+        <entry key="..\:/Android/Spaza-admin/app/src/main/res/layout/menu_row.xml" value="0.25" />
       </map>
     </option>
   </component>

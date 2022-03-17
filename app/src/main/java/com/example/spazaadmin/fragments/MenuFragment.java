@@ -118,7 +118,7 @@ public class MenuFragment extends Fragment implements MenuAdapter.OnItemClickLis
             builder.setPositiveButton(R.string.alert_positive, (dialog, which) -> {
                 FirebaseFirestore
                         .getInstance()
-                        .collection("Menu/"+ FirebaseAuth.getInstance().getUid()+"/Items")
+                        .collection("Menu")
                         .document(list.get(pos).getKey())
                         .delete();
                 Toast.makeText(getContext(),"Menu deleted!" , Toast.LENGTH_SHORT).show();

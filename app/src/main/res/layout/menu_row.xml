@@ -71,35 +71,35 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
             >
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:text="@string/abc_menu_delete_shortcut_label"
-                    android:id="@+id/row_btn_delete"
-                    android:layout_margin="5dp"
-                    app:strokeWidth="2dp"
-                    app:strokeColor="@color/colorThemeColor"
-                    android:textColor="@color/colorThemeColor"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    app:cornerRadius="7dp"
-                />
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/row_btn_delete"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:strokeColor="@color/colorThemeColor"
-                    android:text="@string/text_update"
-                    android:textColor="@color/colorThemeColor"
+                    android:layout_height="40dp"
+                    android:fontFamily="@font/antic"
+                    android:text="@string/delete_text"
+                    android:textAlignment="center"
+                    android:textColor="@color/red"
+                    android:textSize="12sp"
+                    app:strokeColor="@color/red"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="5dp"/>
+
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/row_btn_update"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    app:strokeWidth="2dp"
-                    app:cornerRadius="7dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_margin="5dp"
-                    android:layout_toStartOf="@+id/row_btn_delete"
-                />
+                    android:fontFamily="@font/antic"
+                    android:text="@string/update_text"
+                    android:textAlignment="center"
+                    android:textColor="@color/green"
+                    android:textSize="12sp"
+                    app:strokeColor="@color/green"
+                    android:layout_toStartOf="@id/row_btn_delete"/>
             </RelativeLayout>
         </LinearLayout>
         
